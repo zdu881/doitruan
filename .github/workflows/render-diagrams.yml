@@ -1,0 +1,40 @@
+name: Render PlantUML diagrams
+
+on:
+  push:
+    paths:
+      - 'docs/images/**/*.puml'
+      - '.github/workflows/render-diagrams.yml'
+
+jobs:
+  render:
+    name: Render .puml to SVG
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Render PlantUML diagrams
+        run: |
+          set -euo pipefail
+          shopt -s nullglob || true
+          files=(docs/images/*.puml)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No .puml files found in docs/images/"
+            exit 0
+          fi
+          for f in "${files[@]}"; do
+            echo "Rendering $f"
+            # Use the plantuml Docker image to render to SVG
+            docker run --rm -v "$GITHUB_WORKSPACE":/workspace plantuml/plantuml -tsvg "/workspace/$f"
+          done
+
+      - name: Show generated SVGs
+        run: ls -la docs/images/*.svg || true
+
+      - name: Upload rendered diagrams as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: plantuml-svgs
+          path: docs/images/*.svg

@@ -1,0 +1,52 @@
+@startuml
+' System high-level architecture
+skinparam componentStyle rectangle
+
+package "Users & UI" {
+  actor User
+  component Frontend as FE
+}
+
+package "Backend & API" {
+  component "API Server\n(Flask / FastAPI)" as API
+  component "WebSocket Server" as WS
+}
+
+package "Core Computation (CastRay)" {
+  component CastRay
+}
+
+package "Ray Cluster" {
+  component "Ray Head" as RHead
+  component "Ray Worker(s)" as RWorker
+  database "Object Store\n(Plasma)" as OBJ
+}
+
+database "DB / Storage" as DB
+component "External GIS" as GIS
+component "Monitoring / Ops" as OPS
+
+User --> FE : use UI (browser)
+FE --> API : REST API (POST /api/simulation/start)
+FE --> WS : WebSocket (ws://.../simulation/stream)
+API --> CastRay : submit job / control
+CastRay --> RHead : submit Ray tasks / create Actors
+RHead --> RWorker : schedule tasks
+RWorker --> OBJ : put / get large objects
+RWorker --> API : push status (via object refs or REST)
+API --> DB : persist job metadata and checkpoints
+API --> OPS : emit metrics/logs
+GIS --> API : provide map data
+OPS --> API : admin commands
+
+' protocols/notes
+note right of FE
+  Protocols: HTTPS / WebSocket
+  Auth: Bearer token (optional)
+end note
+
+note left of RHead
+  Ray uses gRPC between head/workers
+end note
+
+@enduml

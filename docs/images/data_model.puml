@@ -1,0 +1,41 @@
+@startuml
+title Core API data model
+
+class Scenario {
+  +id: string
+  +map_ref: string
+  +base_stations: BaseStation[]
+  +drones: Drone[]
+}
+
+class Drone {
+  +id: string
+  +init_pos: float[3]
+  +mission: string
+  +params: map
+}
+
+class BaseStation {
+  +id: string
+  +pos: float[3]
+  +tx_power_dbm: int
+  +band: string
+}
+
+class NetworkParams {
+  +band: string
+  +tx_power_dbm: int
+  +bandwidth_mhz: int
+}
+
+class Runtime {
+  +duration_s: int
+  +update_interval_s: int
+}
+
+Scenario "1" *-- "*" Drone
+Scenario "1" *-- "*" BaseStation
+Scenario o-- NetworkParams
+Scenario o-- Runtime
+
+@enduml
