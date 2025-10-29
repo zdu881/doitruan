@@ -1,0 +1,19 @@
+@startuml
+title VehicleAgent state machine
+
+[*] --> Initialized
+Initialized --> Idle : agent created
+Idle --> Flying : receive mission
+Flying --> Communicating : in comms range
+Communicating --> Checkpointing : periodic checkpoint
+Checkpointing --> Flying : resume
+Flying --> Error : exception / crash
+Error --> Terminated : unrecoverable
+Error --> Flying : retry (if recoverable)
+Flying --> Terminated : mission complete
+
+state Error {
+  note right: retry policy: up to N times, then escalate
+}
+
+@enduml

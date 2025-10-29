@@ -1,0 +1,18 @@
+@startuml
+title ML pipeline (edge-cloud)
+
+actor EdgeNode
+actor Cloud
+database FeatureStore
+component "Edge Model (LightGBM)" as EM
+component "Cloud Model (Transformer)" as CM
+
+EdgeNode -> EM : ingest KPIs
+EM -> EdgeNode : anomaly / low-level alert
+EdgeNode -> FeatureStore : upload features + alerts
+Cloud -> CM : train / update model (offline)
+FeatureStore -> CM : provide training data
+CM -> Cloud : predictions / high-level alerts
+Cloud -> Ops : notify / recommend actions
+
+@enduml

@@ -1,0 +1,109 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 172.67.211.21:443...
+*   Trying 2606:4700:3035::ac43:d315:443...
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0* Connected to www.plantuml.com (172.67.211.21) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /usr/lib/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [2525 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [79 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=www.plantuml.com
+*  start date: Oct 25 03:57:55 2025 GMT
+*  expire date: Jan 23 04:57:52 2026 GMT
+*  subjectAltName: host "www.plantuml.com" matched cert's "www.plantuml.com"
+*  issuer: C=US; O=Google Trust Services; CN=WE1
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x65317faef9f0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /plantuml/svg/ HTTP/2
+> Host: www.plantuml.com
+> user-agent: curl/7.81.0
+> accept: */*
+> content-length: 731
+> content-type: application/x-www-form-urlencoded
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [230 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [230 bytes data]
+* old SSL session ID is stale, removing
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 302 
+< date: Wed, 29 Oct 2025 05:49:54 GMT
+< content-type: text/plain; charset=utf-8
+< content-length: 0
+< location: http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa700001
+< cache-control: no-cache
+< display: staticcontent_sol
+< display: orig_site_sol
+< response: 302
+< vary: Accept-Encoding,Origin
+< x-ez-proxy-out: true 2.4
+< x-ezoic-cdn: Bypass
+< x-middleton-display: staticcontent_sol
+< x-middleton-display: orig_site_sol
+< x-middleton-response: 302
+< x-sol: orig
+< cf-cache-status: DYNAMIC
+< report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=1t7BQqTNbkuef5b%2Fo6Bsk9jnV4QHdq2X2flyhWQSgNBESiyMsmRSC6skS7cqyN0RAK7vBMkX56RFb0k4rUI0wiNqcEn6CKDiiAvONwa2NcM%3D"}]}
+< nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+< server: cloudflare
+< set-cookie: ezoictest=stable; HttpOnly; Path=/; Domain=plantuml.com; Expires=Wed, 29 Oct 2025 06:19:54 GMT
+< cf-ray: 9960646dfe368eab-AMS
+< alt-svc: h3=":443"; ma=86400
+< 
+{ [0 bytes data]
+100   731    0     0  100   731      0    347  0:00:02  0:00:02 --:--:--   347100   731    0     0  100   731      0    347  0:00:02  0:00:02 --:--:--   347
+* Connection #0 to host www.plantuml.com left intact

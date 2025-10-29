@@ -66,6 +66,11 @@
 - 分布式计算与状态更新（`CastRay/ray_cluster_discovery.py`, `vehicle_mec_agent.py`）
 - 汇总、处理并通过 WebSocket 推送结果
 
+<!-- 仿真生命周期时序图 -->
+![仿真生命周期时序图](docs/images/simulation_sequence.svg)
+
+*图：仿真生命周期时序图 — 描述从前端提交仿真到 Ray 执行并回传结果的端到端消息与时序。*
+
 ### 2.4 结构设计
 
 主要模块：
@@ -73,6 +78,11 @@
 - 应用层：`droneOnCampus/src/backend/python/castray_backend.py`
 - 核心计算层：`CastRay/main.py`, `CastRay/models.py`, `CastRay/ray_casting.py`, `CastRay/file_transfer.py`
 - 集群管理：`CastRay/start_ray_cluster.py`, `CastRay/ray_cluster_discovery.py`
+
+<!-- 系统总体架构 -->
+![系统总体架构](docs/images/architecture.svg)
+
+*图：系统总体架构 — 展示前端、后端、CastRay 与 Ray 集群之间的交互与通信协议（REST / WebSocket / gRPC）。*
 
 #### 功能映射（示例表）
 
@@ -86,6 +96,11 @@
 | 任务管理 | `droneOnCampus/src/backend/python/castray_backend.py` |
 
 ### 2.5 接口设计（概要）
+
+<!-- VehicleAgent 状态机 -->
+![VehicleAgent 状态机](docs/images/vehicle_agent_state.svg)
+
+*图：VehicleAgent 状态机 — 描述单个无人机代理在仿真中的生命周期与状态转换（Initialized → Flying → Communicating → Checkpointing → Error / Terminated）。*
 
 - 前端-后端：RESTful（如 `POST /api/simulation/start`）与 WebSocket（如 `ws://server/api/simulation/stream`）。
 - 应用-计算：通过 `ray.remote()` 提交任务或创建 Actor。
@@ -197,6 +212,11 @@ Response (200 OK):
 
 （注：以上示例为推荐最小契约；根据项目需要可扩展字段与认证机制，例如在 Header 中加入 `Authorization: Bearer <token>`。）
 
+<!-- 数据模型图 -->
+![核心 API 数据模型](docs/images/data_model.svg)
+
+*图：核心 API 数据模型 — 显示 Scenario、Drone、BaseStation、NetworkParams 与 Runtime 等对象及主要字段（用于请求/响应校验）。*
+
 ## 3 系统出错处理设计
 
 详见原文档；此处保留日志、前端提示、Ray 集群异常处理、参数校验、任务重试、检查点与优雅降级等机制的描述（已将相关文件名统一为反引号格式）。
@@ -205,10 +225,25 @@ Response (200 OK):
 
 说明 `Ray` 在任务（Task）、Actor、对象存储（Object Store）与 gRPC 通信方面的使用模式，已在文中统一为标准术语与示例文件路径引用。
 
+<!-- Ray 使用模式 -->
+![Ray 使用模式](docs/images/ray_patterns.svg)
+
+*图：Ray 使用模式 — 说明 Task 与 Actor 的分工、ObjectRef 的传递与失败重试示意。*
+
 ## 5 基站报错预警（机器学习）
 
 保留并稍作精简：描述云-边协同、边缘轻量检测（如 LightGBM）、云端长序列模型（如 Transformer/FT-Transformer）与分级预警的思路。
 
+<!-- ML 预警流水线 -->
+![ML 预警流水线](docs/images/ml_pipeline.svg)
+
+*图：ML 预警流水线 — 描述数据采集、边缘检测、云端聚合、模型训练/部署与告警下发的端到端流程。*
+
 ## 6 应用
 
 保留原有应用场景：网络规划、资源优化、应急通信保障、算法验证平台。
+
+<!-- 前端 mockup -->
+![前端仪表板示意](docs/images/frontend_mockup.svg)
+
+*图：前端仪表板 mockup — 示意 3D 场景视图、实时 KPI 曲线、事件日志与控制面板的典型布局。*
