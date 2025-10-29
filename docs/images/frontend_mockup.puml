@@ -1,0 +1,22 @@
+@startuml
+title Frontend mockup (dashboard)
+
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+
+rectangle "3D Scene" as scene
+rectangle "KPI Charts" as kpi
+rectangle "Control Panel" as ctrl
+rectangle "Event Log" as log
+
+scene -[hidden]-> kpi
+scene -[hidden]-> ctrl
+scene -[hidden]-> log
+
+note bottom
+  Layout: left=3D scene, right=charts + control + log
+end note
+
+@enduml

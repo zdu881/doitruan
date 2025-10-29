@@ -1,0 +1,18 @@
+@startuml
+title Ray usage patterns (Task / Actor / Object Store)
+
+actor "Frontend / API" as API
+participant "Ray Task (stateless)" as Task
+participant "Ray Actor (stateful)" as Actor
+database "Object Store (Plasma)" as OBJ
+
+API -> Task : submit remote task
+Task -> OBJ : put(large_result)\nreturn obj_ref
+API -> Actor : call method (update_position)
+Actor -> OBJ : get(obj_ref)\nuse shared data
+Task -> Actor : notify / send ref
+
+note over Actor: Actors persist state across calls
+note over Task: Tasks are short-lived, parallel
+
+@enduml

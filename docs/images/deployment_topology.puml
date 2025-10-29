@@ -1,0 +1,29 @@
+@startuml
+title Deployment topology
+node "Developer Laptop" as Dev {
+  component "Local Frontend" as LF
+  component "Local Backend (dev)" as LB
+}
+
+node "Edge / MEC" as Edge {
+  component "Edge Node\n(Ray Worker / Inference)" as EN
+}
+
+node "Cloud / Data Center" as Cloud {
+  component "Ray Head" as RH
+  component "Ray Worker Pool" as RWP
+  database "Object Storage" as OBJ
+  database "DB / Metadata" as DB
+}
+
+LF --> LB : HTTP / WebSocket
+LB --> RH : submit jobs (ray)
+RH --> RWP : schedule tasks
+RWP --> OBJ : store large objects
+LB --> DB : job metadata
+EN --> RH : optional local worker registration
+
+note left: Single-machine dev: all components on laptop
+note right: Prod: head in control plane, workers on many nodes
+
+@enduml
